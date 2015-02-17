@@ -1,11 +1,11 @@
 (ns my-namespace
-  (:gen-class))                         ;:gen-class here means this
-                                        ;namespace will be compiled
-                                        ;into a .class file if the aot
-                                        ;task is run
+  (:require [boot.cli :refer [defclifn]])
+  (:gen-class))                         
 
-(defn -main [& args]                    ;This -main function will
-                                        ;become the main method if we
-                                        ;set up this namespace to aot,
-                                        ;and point jar -m at it
-  (println "Hello world!"))
+(defclifn -main
+  [a a-option VAL  kw    "The option."
+   c counter       int   "The counter."
+   e entry    VAL  sym   "An entrypoint symbol."
+   f flag          bool  "Enable flag."
+   o o-option VAL  str   "The other option."]                    
+  (println (apply str *opts*)))
